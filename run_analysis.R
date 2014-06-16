@@ -28,7 +28,7 @@ activityIdColName <- "activity.id"
 
 # activity_labels.txt: space delimited values id to activity map. join to 
 activityLabels <- read.table(paste0(dataDir, "activity_labels.txt"), col.names=c(activityIdColName, "activity.name"))
-                         
+
 # features.txt: space delimited values column number to column name. row-to-row match to next file.
 features <- read.table(paste0(dataDir, "features.txt"), as.is = TRUE)
 #colNames <- features$V2
@@ -57,17 +57,18 @@ trainObs <- cbind(trainData, trainSubjectIds, trainActivityIds)
 # rbind the two together to form one data frame
 obs <- rbind(testObs, trainObs)
 
-# filter the columns down to only those with std() and mean() in their names and subject.id and activity.id
 meanStdColumns <- grep("mean\\(\\)|std\\(\\)", features$V2)
 colsOfIterest <- append(meanStdColumns, c(562, 563)) # 562 = subject.id, 562 = activity.id
 
 filteredObs <- obs[,colsOfIterest]
-colnames(filteredObs) <- c(features$V2[meanStdColumns], subjectIdColName, activityIdColName)
+meanStdColsLabels <- c(features$V2[meanStdColumns], subjectIdColName, activityIdColName)
+colnames(filteredObs) <- lapply(meanStdColsLabels, function(label) { gsub("\\(\\)", label, replacement="") })
 
+library(data.table)
+filteredObs <- data.table(filteredObs)
+# Including activity name so it's excluded from columns that are averaged
+tidyObs <- filteredObs[, lapply(.SD, mean), by=c("activity.id", "subject.id")][order(activity.id, subject.id)]
 # Add the activity names to the obs
-mergedObs <- merge(activityLabels, filteredObs)
+tidyObs <- merge(activityLabels, tidyObs)
 
-# Creates a second, independent tidy data set with the average of each 
-#      variable for each activity and each subject. 
-# Average by activity and subject so no duplicate activyt and subject combinations across data
-
+# Write out the tidy obs to a file

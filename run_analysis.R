@@ -43,6 +43,8 @@ testActivityIds <- read.table(paste0(testDir, "y_test.txt")) #, col.names=c(acti
 testData <- read.table(paste0(testDir, "X_test.txt")) #, col.names = colNames)
 testObs <- cbind(testData, testSubjectIds, testActivityIds)
 
+# TODO: Create function that returns FQ path with file name (see below paste0 current usage)
+
 # y_train.txt: the activitiy type ID for each observation. row-to-row match to next file.
 # X_train.txt: the observations
 # subject_train.txt: the subject ID for each observation. Not needed.

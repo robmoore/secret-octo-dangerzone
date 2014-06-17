@@ -1,27 +1,27 @@
 # Codebook
 
 For specific details regarding the data set used to derive this data set, 
-please see the README.txt and features_info.txt file provided in the source data 
-set(https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip). 
+please see the `README.txt` and `features_info.txt` file provided in the [source data 
+set](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip). 
 It provides the background for the study itself as well as an explanation for 
 each measurement provided and is not reproduced here.
 
 ## Original Data Overview
 
 The data is broken up into test and training data sets which are stored in separate
-directories ("test" and "train", respectively).
+directories (`test` and `train`, respectively).
 
 The features.txt file provides the column names for the data in each set.
 
-The subject files (subject_test.txt and subject_train.txt) is of the same size 
-as the test data (X_test.txt and X_train.txt) and contains the subject IDs for
-each row of data. Likewise, the activity IDs can be found in the y_test.txt and
-y_train.txt files which also map to each row of the measurement data.
+The subject files (`subject_test.txt` and `subject_train.txt`) is of the same size 
+as the test data (`X_test.txt` and `X_train.txt`) and contains the subject IDs for
+each row of data. Likewise, the activity IDs can be found in the `y_test.txt` and
+`y_train.txt` files which also map to each row of the measurement data.
 
-In the top level of the provided data, the activity_labels.txt file contains a 
+In the top level of the provided data, the `activity_labels.txt` file contains a 
 description for each activity and is mapped by activity ID.
 
-The column names for each data set are contained within the features.txt file
+The column names for each data set are contained within the `features.txt` file
 and map to the column number in the data set itself.
 
 ## Processed Data Overview
